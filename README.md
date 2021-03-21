@@ -11,8 +11,16 @@ The following packages beed to be installed:
 [Tensorflow] (https://www.tensorflow.org/api_docs/python/tf)
 
 
-### Installing
+### Running the test
 
+Start cloning the repo by running the following:
+```
+git clone https://github.com/erfanhss/HitachiSecFedLearning.git
+```
+Then run the test file by executing the following command:
+```
+mpirun -n (size of network) -H (server, list of clients) python main.py --num_peers (number of clients) --server_address (IP of the central node) --robust (robustness) --learning_rate (learning rate) --batch_size_per_worker (batch size) --resiliency (resiliency)
+```
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be
