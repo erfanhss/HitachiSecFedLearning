@@ -7,7 +7,9 @@ The test is designed to run on a cluster. The clients should be able to transmit
 
 ### Prerequisites
 The following packages beed to be installed:
+
 [MPI4Py] (https://mpi4py.readthedocs.io/en/stable/)
+
 [Tensorflow] (https://www.tensorflow.org/api_docs/python/tf)
 
 
