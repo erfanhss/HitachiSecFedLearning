@@ -37,3 +37,11 @@ num_iterations: the number of iterations for the learning algorithm (defaulted t
 
 resiliency: percentage of the network required for the algorithm to operate (defaulted to 1)
 
+### Aggregation functions
+The following functions have been implemented in the GoWrappers.py:
+```
+client_phase1(server_address, robust, log_degree, log_scale, resiliency)
+server_phase1(server_address, num_peers, robust, log_degree, log_scale)
+client_phase2(inputs, public_key, shamir_share, id, server_address, robust, log_degree, log_scale, resiliency)
+server_phase2(server_address, num_peers, robust, resiliency, log_degree, log_scale, input_length)
+```
