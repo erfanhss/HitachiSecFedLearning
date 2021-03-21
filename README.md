@@ -19,8 +19,16 @@ git clone https://github.com/erfanhss/HitachiSecFedLearning.git
 ```
 Then run the test file by executing the following command:
 ```
-mpirun -n (size of network) -H (server, list of clients) python main.py --num_peers (number of clients) --server_address (IP of the central node) --robust (robustness) --learning_rate (learning rate) --batch_size_per_worker (batch size) --resiliency (resiliency)
+mpirun -n (size of network) -H (server, list of clients) python main.py --num_peers (number of clients) --server_address (IP of the central node) --robust (robustness) --learning_rate (learning rate) --batch_size_per_worker (batch size) --resiliency (resiliency) --num_iterations (number of iterations)
 ```
+num_peers: number of clients in the network
+server_address: IP of the central node ("localhost:8080")
+robust: deteremines the robustness of the network, "True" for robust algorithm.
+learning_rate: learning rate of learning algorithm. Defaulted to 0.1
+batch_size_per_worker: the batch size for each worker. Defaulted to 256
+num_iterations: the number of iterations for the learning algorithm. Defaulted to 100
+resiliency: percentage of the network required for the algorithm to operate. defaulted to 1
+
 A step by step series of examples that tell you how to get a development env running
 
 Say what the step will be
