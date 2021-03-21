@@ -25,15 +25,15 @@ mpirun -n (size of network) -H (server, list of clients) python main.py --num_pe
 ```
 num_peers: number of clients in the network
 
-server_address: IP of the central node ("localhost:8080")
+server_address: IP of the central node (example: "localhost:8080")
 
 robust: deteremines the robustness of the network, "True" for robust algorithm.
 
-learning_rate: learning rate of learning algorithm. Defaulted to 0.1
+learning_rate: learning rate of learning algorithm (defaulted to 0.1)
 
-batch_size_per_worker: the batch size for each worker. Defaulted to 256
+batch_size_per_worker: the batch size for each worker (defaulted to 256)
 
-num_iterations: the number of iterations for the learning algorithm. Defaulted to 100
+num_iterations: the number of iterations for the learning algorithm (defaulted to 100)
 
-resiliency: percentage of the network required for the algorithm to operate. defaulted to 1
+resiliency: percentage of the network required for the algorithm to operate (defaulted to 1)
 
