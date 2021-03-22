@@ -67,6 +67,9 @@ The python script can be modified to work any model or any optimizer. The constr
 
 ### List of files
 This repository contains the following files:
+
 main.py: learning script using the secure aggregation
+
 notSecure.py: learning script using plain distributed SGD for performance comparison purpose
+
 GoWrappers.py: contains the code for wrapping the aggregagtion module in Python
