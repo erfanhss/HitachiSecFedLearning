@@ -38,7 +38,8 @@ num_iterations: the number of iterations for the learning algorithm (defaulted t
 resiliency: percentage of the network required for the algorithm to operate (defaulted to 1)
 
 ### Aggregation functions
-The following functions have been implemented in the GoWrappers.py:
+The underlying secure aggregation protocols have been implemented using Golang. The code is later is compiled into a shared library and wrapped in Python.
+The following functions are available in the GoWrappers.py:
 ```
 client_phase1(server_address, robust, log_degree, log_scale, resiliency)
 server_phase1(server_address, num_peers, robust, log_degree, log_scale)
