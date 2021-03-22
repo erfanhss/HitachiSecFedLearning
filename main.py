@@ -7,6 +7,7 @@ from mpi4py import MPI
 import argparse
 import time
 
+# defining the learning model
 class Model:
     def __init__(self, lr):
         inputs = keras.Input(shape=(28, 28, 1), name="digits")
@@ -77,6 +78,7 @@ class Model:
             test_loss.update_state(lossValue)
         return test_accuracy.result().numpy(), test_loss.result().numpy()
 
+# defining the functionality for the central nodes
 def master():
     ### initilize Network setup
     print("Initializing phase 1 at master")
@@ -102,7 +104,7 @@ def master():
         print("Time spent: ", time.time() - init)
         print("-----------------------------------")
 
-
+# defining the functionality for the client nodes
 def client():
     time.sleep(1)
     ### initilize Network setup
@@ -129,7 +131,7 @@ parser.add_argument("--robust", required=True)
 parser.add_argument("--learning_rate", required=False, default=0.1)
 parser.add_argument("--num_iterations", required=False, default=100)
 parser.add_argument("--batch_size_per_worker", required=False, default=256)
-parser.add_argument("--resiliency", required=False, default=0)
+parser.add_argument("--resiliency", required=False, default=1)
 
 args = parser.parse_args()
 learning_rate = float(args.learning_rate)
