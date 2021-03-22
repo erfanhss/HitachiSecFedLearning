@@ -43,5 +43,6 @@ The following functions have been implemented in the GoWrappers.py:
 client_phase1(server_address, robust, log_degree, log_scale, resiliency)
 server_phase1(server_address, num_peers, robust, log_degree, log_scale)
 client_phase2(inputs, public_key, shamir_share, id, server_address, robust, log_degree, log_scale, resiliency)
-server_phase2(server_address, num_peers, robust, resiliency, log_degree, log_scale, input_length)
+server_phase2(server_address, num_peers, robust, resiliency, log_degree, log_scale, input_length) 
 ```
+Phase 1 functions are used to generated a collective public key and the shamir share for each client. The output of the function is fed into phase 2 functions which handle the aggregation.
