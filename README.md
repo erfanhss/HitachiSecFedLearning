@@ -2,7 +2,7 @@
 
 This library implements a novel secure aggregation framework based on multi-party homomorphic encyrption. We assume a setup with central node and N participants. We only require transmission channels between clients and the central node. Initially the clients setup a collective public key. This step is performed only once. Later on, the public key is used to encrypt and transmit gradients. The central node, attempts to decrypt the aggregated gradients by asking clients for additional information. The algorithm is designed to be robust against user dropout. The resiliency of the network is tunable and determined in the first phase.
 
-## Getting Started
+## Getting started
 The test is designed to run on a cluster. The clients should be able to transmit TCP packets to the central node.
 
 ### Prerequisites
@@ -64,3 +64,9 @@ input_length: length of the input vector at clients
 
 ### Learning Model
 The python script can be modified to work any model or any optimizer. The constructor of Model class defined in main.py should be modified for such changes. In the current file a convolutional neural network is being trained using SGD optimizer and cross-entropy loss. 
+
+### List of files
+This repository contains the following files:
+main.py: learning script using the secure aggregation
+notSecure.py: learning script using plain distributed SGD for performance comparison purpose
+GoWrappers.py: contains the code for wrapping the aggregagtion module in Python
