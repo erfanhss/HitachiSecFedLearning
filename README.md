@@ -61,3 +61,6 @@ shamir_share: the secret share of the collective secret key generated according 
 id: the id of the client in the network (output of client_phase1)
 
 input_length: length of the input vector at clients
+
+### Learning Model
+The python script can be modified to work any model or any optimizer. The constructor of Model class defined in main.py should be modified for such changes. In the current file a convolutional neural network is being trained using SGD optimizer and cross-entropy loss. 
