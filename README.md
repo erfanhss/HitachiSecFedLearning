@@ -6,7 +6,7 @@ This library implements a novel secure aggregation framework based on multi-part
 The test is designed to run on a cluster. The clients should be able to transmit TCP packets to the central node.
 
 ### Prerequisites
-The following packages beed to be installed:
+The following packages need to be installed:
 
 [MPI4Py] (https://mpi4py.readthedocs.io/en/stable/)
 
@@ -46,3 +46,17 @@ client_phase2(inputs, public_key, shamir_share, id, server_address, robust, log_
 server_phase2(server_address, num_peers, robust, resiliency, log_degree, log_scale, input_length) 
 ```
 Phase 1 functions are used to generated a collective public key and the shamir share for each client. The output of the function is fed into phase 2 functions which handle the aggregation.
+
+log_degree: the degree of the polynomial used in encryption
+
+log_scale: the scale parameter of underlying CKKS scheme
+
+inputs: the input vector at each client
+
+public_key: the collective public key (output of client_phase1)
+
+shamir_share: the secret share of the collective secret key generated according to the Shamir's scheme (output of client_phase1)
+
+id: the id of the client in the network (output of client_phase1)
+
+input_length: length of the input vector at clients
