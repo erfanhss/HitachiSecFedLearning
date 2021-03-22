@@ -3,7 +3,7 @@ package main
 func main() {
 	//args := os.Args[1:]
 	//appType := args[0]
-	////fmt.Println(appType)
+	//fmt.Println(appType)
 	//scale := float64(1 << 40)
 	//robust := false
 	//logDegree := uint64(13)
