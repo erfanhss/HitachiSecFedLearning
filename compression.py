@@ -22,6 +22,8 @@ def master():
     GoWrappers.server_phase1(server_Address, num_peers, robust, log_degree, log_scale)
     ### letting clients know the server is up
     print("Phase 1 completed")
+    accuracy = []
+    loss = []
     for iteration in range(iterations):
         init = time.time()
         ### update model paramaters for clients
@@ -41,10 +43,13 @@ def master():
         print("-----------------------------------")
         print("Iteration: ", iteration + 1)
         print("Accuracy: ", round(res[0] * 100, 3))
+        accuracy.append(round(res[0] * 100, 3))
         print("Loss: ", round(res[1], 5))
+        loss.append(round(res[1], 5))
         print("Time spent: ", time.time() - init)
         print("-----------------------------------")
-
+        np.save('accuracy_secure', np.array(accuracy))
+        np.save('loss_secure', np.array(loss))
 
 def client():
     time.sleep(1)

@@ -10,6 +10,8 @@ import model
 
 def master():
     ### letting clients know the server is up
+    accuracy = []
+    loss = []
     for iteration in range(iterations):
         init = time.time()
         ### update model paramaters for clients
@@ -28,10 +30,13 @@ def master():
         print("-----------------------------------")
         print("Iteration: ", iteration + 1)
         print("Accuracy: ", round(res[0] * 100, 3))
+        accuracy.append(round(res[0] * 100, 3))
         print("Loss: ", round(res[1], 5))
+        loss.append(round(res[1], 5))
         print("Time spent: ", time.time() - init)
         print("-----------------------------------")
-
+        np.save('accuracy_notSecure', np.array(accuracy))
+        np.save('loss_notSecure', np.array(loss))
 
 def client():
     ### upadte model parameters
