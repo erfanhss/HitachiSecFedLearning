@@ -2,7 +2,6 @@ import numpy as np
 import GoWrappers
 import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras import layers
 from mpi4py import MPI
 import argparse
 import time
