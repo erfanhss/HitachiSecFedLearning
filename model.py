@@ -5,7 +5,7 @@ from tensorflow.keras import layers
 # define the model architecture
 
 class Model:
-    def __init__(self, lr):
+    def __init__(self, lr, x_train, y_train):
         inputs = keras.Input(shape=(28, 28, 1), name="digits")
         conv1 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(inputs)
         conv1 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(conv1)
@@ -64,7 +64,7 @@ class Model:
         self.accuracy.append(acc)
         self.loss.append(loss)
 
-    def report_performance(self):
+    def report_performance(self, x_test, y_test):
         test_loss = tf.keras.metrics.Mean(name='test_loss')
         test_accuracy = tf.keras.metrics.SparseCategoricalAccuracy(
             name='test_accuracy')

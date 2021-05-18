@@ -26,7 +26,7 @@ def master():
             grad_req.append(comm.Irecv(gradients[worker_idx], source=worker_idx+1, tag=0))
         MPI.Request.waitall(grad_req)
         model.update_params(np.mean(gradients, axis=0))
-        res = model.report_performance()
+        res = model.report_performance(x_test, y_test)
         print("-----------------------------------")
         print("Iteration: ", iteration + 1)
         print("Accuracy: ", round(res[0] * 100, 3))
@@ -69,7 +69,7 @@ rank = comm.Get_rank()
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 x_train = np.reshape(x_train, (-1, 28, 28, 1)) / 255.
 x_test = np.reshape(x_test, (-1, 28, 28, 1)) / 255.
-model = model.Model(learning_rate)
+model = model.Model(learning_rate, x_train, y_train)
 if rank == 0:
     print("----------------------------------------")
     print("Number of clients: ", num_peers)

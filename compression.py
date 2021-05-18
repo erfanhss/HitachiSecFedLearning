@@ -39,7 +39,7 @@ def master():
             phi = random_matrix(alpha/2/samples, samples, params_count, seed=tf.constant([iteration, iteration]))
             update = tf.sparse.sparse_dense_matmul(tf.sparse.transpose(phi), tf.convert_to_tensor(update, dtype=tf.float32))
         model.update_params(update)
-        res = model.report_performance()
+        res = model.report_performance(x_test, y_test)
         print("-----------------------------------")
         print("Iteration: ", iteration + 1)
         print("Accuracy: ", round(res[0] * 100, 3))
@@ -116,7 +116,7 @@ rank = comm.Get_rank()
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 x_train = np.reshape(x_train, (-1, 28, 28, 1)) / 255.
 x_test = np.reshape(x_test, (-1, 28, 28, 1)) / 255.
-model = model.Model(learning_rate)
+model = model.Model(learning_rate, x_train, y_train)
 # server_Address = b"localhost:8080"
 params_count = 37962
 samples = int(params_count/r)
