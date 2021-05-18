@@ -60,7 +60,7 @@ class Model:
         return output
 
     def update_params(self, flat_grad):
-        output = self.unflatten(flat_grad, self.x_train, self.y_train)
+        output = self.unflatten(flat_grad)
         self.optimizer.apply_gradients(zip(output, self.model.trainable_weights))
         acc, loss = self.report_performance(self.x_train, self.y_train)
         self.accuracy.append(acc)
