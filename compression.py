@@ -19,9 +19,10 @@ def random_matrix(p, s, w, seed):
 def master():
     ### initilize Network setup
     print("Initializing phase 1 at master")
+    init = time.time()
     GoWrappers.server_phase1(server_Address, num_peers, robust, log_degree, log_scale)
     ### letting clients know the server is up
-    print("Phase 1 completed")
+    print("Phase 1 completed with time ", time.time()-init)
     accuracy = []
     loss = []
     for iteration in range(iterations):
