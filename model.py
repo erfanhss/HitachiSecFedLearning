@@ -19,6 +19,8 @@ class Model:
         flatten = layers.Flatten()(pool3)
         x1 = layers.Dense(64, activation="relu")(flatten)
         outputs = layers.Dense(10, name="predictions")(x1)
+        self.x_train = x_train
+        self.y_train = y_train
         self.model = keras.Model(inputs=inputs, outputs=outputs)
         self.optimizer = keras.optimizers.SGD(learning_rate=1)
         self.loss_fn = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -58,9 +60,9 @@ class Model:
         return output
 
     def update_params(self, flat_grad):
-        output = self.unflatten(flat_grad)
+        output = self.unflatten(flat_grad, self.x_train, self.y_train)
         self.optimizer.apply_gradients(zip(output, self.model.trainable_weights))
-        acc, loss = self.report_performance()
+        acc, loss = self.report_performance(self.)
         self.accuracy.append(acc)
         self.loss.append(loss)
 
