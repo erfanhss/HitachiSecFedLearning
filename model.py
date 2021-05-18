@@ -6,19 +6,19 @@ import numpy as np
 # define the model architecture
 
 class Model:
-    def __init__(self, lr, x_train, y_train):
+    def __init__(self, x_train, y_train):
         inputs = keras.Input(shape=(28, 28, 1), name="digits")
         conv1 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(inputs)
-        conv1 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(conv1)
+        conv1 = layers.Conv2D(32, (3, 3), padding='same')(conv1)
         pool1 = layers.MaxPool2D()(conv1)
         conv2 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(pool1)
-        conv2 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(conv2)
+        conv2 = layers.Conv2D(32, (3, 3), padding='same')(conv2)
         pool2 = layers.MaxPool2D()(conv2)
-        conv3 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(pool2)
-        conv3 = layers.Conv2D(32, (3, 3), activation='relu', padding='same')(conv3)
+        conv3 = layers.Conv2D(32, (3, 3), padding='same')(pool2)
+        conv3 = layers.Conv2D(32, (3, 3), padding='same')(conv3)
         pool3 = layers.MaxPool2D()(conv3)
         flatten = layers.Flatten()(pool3)
-        x1 = layers.Dense(64, activation="relu")(flatten)
+        x1 = layers.Dense(512, activation="relu")(flatten)
         outputs = layers.Dense(10, name="predictions")(x1)
         self.x_train = x_train
         self.y_train = y_train
@@ -35,7 +35,7 @@ class Model:
         with tf.GradientTape() as tape:
             logits = self.model(x_train, training=True)
             loss_value = self.loss_fn(y_train, logits)
-        grads = tape.gradient(loss_value, self.model.trainable_weights, )
+        grads = tape.gradient(loss_value, self.model.trainable_weights)
         result = self.flatten_gradients(grads)
         self.flat_gradient_shape = result.numpy().shape
         return self.flatten_gradients(grads)
@@ -75,7 +75,7 @@ class Model:
         test_batch_idx = np.array_split(test_idx, 60)
         for batchIdx in test_batch_idx:
             logits = self.model(x_test[batchIdx], training=False)
-            lossValue = self.loss_fn(y_test[batchIdx], logits)/len(batchIdx)
+            lossValue = self.loss_fn(y_test[batchIdx], logits)
             test_accuracy.update_state(y_test[batchIdx], logits)
             test_loss.update_state(lossValue)
         return test_accuracy.result().numpy(), test_loss.result().numpy()

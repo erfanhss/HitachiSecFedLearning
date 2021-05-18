@@ -20,12 +20,12 @@ def master():
         for worker_idx in range(num_peers):
             param_req.append(comm.Isend(np.ascontiguousarray(params, dtype=float), dest=worker_idx + 1, tag=0))
         MPI.Request.waitall(param_req)
-        gradients = [np.zeros(model.flat_gradient_shape) for _ in range(num_peers)]
+        gradients = [np.zeros(model.flat_gradient_shape, dtype=float) for _ in range(num_peers)]
         grad_req = []
         for worker_idx in range(num_peers):
             grad_req.append(comm.Irecv(gradients[worker_idx], source=worker_idx+1, tag=0))
         MPI.Request.waitall(grad_req)
-        model.update_params(np.mean(gradients, axis=0))
+        model.update_params(learning_rate*np.mean(gradients, axis=0))
         res = model.report_performance(x_test, y_test)
         print("-----------------------------------")
         print("Iteration: ", iteration + 1)
@@ -48,7 +48,7 @@ def client():
         model.model.set_weights(weights)
         part = np.random.permutation(len(x_train))[0:batch_size_per_worker]
         grad = model.calculate_gradients(x_train[part], y_train[part]).numpy()
-        req = comm.Isend(grad, dest=0, tag=0)
+        req = comm.Isend(np.array(grad, dtype=float), dest=0, tag=0)
         req.Wait()
 
 parser = argparse.ArgumentParser()
@@ -69,7 +69,7 @@ rank = comm.Get_rank()
 (x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
 x_train = np.reshape(x_train, (-1, 28, 28, 1)) / 255.
 x_test = np.reshape(x_test, (-1, 28, 28, 1)) / 255.
-model = model.Model(learning_rate, x_train, y_train)
+model = model.Model(x_train, y_train)
 if rank == 0:
     print("----------------------------------------")
     print("Number of clients: ", num_peers)
